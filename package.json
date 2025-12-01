@@ -1,0 +1,23 @@
+{
+  "name": "elysia-template",
+  "version": "1.0.50",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bun run --watch src/index.ts",
+    "auth:generate": "bunx @better-auth/cli generate --config src/infra/auth"
+  },
+  "dependencies": {
+    "@elysiajs/openapi": "^1.4.11",
+    "@hedystia/better-auth-typeorm": "^0.4.2",
+    "better-auth": "^1.4.4",
+    "elysia": "latest",
+    "pg": "^8.16.3",
+    "typeorm": "^0.3.27",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.15.6",
+    "bun-types": "latest"
+  },
+  "module": "src/index.js"
+}
