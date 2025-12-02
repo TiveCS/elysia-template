@@ -1,0 +1,17 @@
+services:
+  database:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+    volumes:
+      - elysia_template:/var/lib/postgresql/data
+
+volumes:
+  elysia_template:
+
+networks:
+  elysia-template:

@@ -1,23 +1,32 @@
 {
   "name": "elysia-template",
   "version": "1.0.50",
+  "module": "src/index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts",
-    "auth:generate": "bunx @better-auth/cli generate --config src/infra/auth"
+    "auth:generate": "bunx @better-auth/cli generate --config src/infra/auth/index.ts -y",
+    "compose:reset": "podman compose down && podman compose up -d",
+    "typeorm": "typeorm-ts-node-esm",
+    "typeorm:migrate:run": "typeorm-ts-node-esm migration:run -d src/infra/sql/database.ts"
   },
   "dependencies": {
+    "@bogeychan/elysia-logger": "^0.1.10",
     "@elysiajs/openapi": "^1.4.11",
     "@hedystia/better-auth-typeorm": "^0.4.2",
     "better-auth": "^1.4.4",
+    "dotenv": "^17.2.3",
     "elysia": "latest",
     "pg": "^8.16.3",
+    "reflect-metadata": "^0.2.2",
     "typeorm": "^0.3.27",
     "zod": "^4.1.13"
   },
   "devDependencies": {
     "@types/pg": "^8.15.6",
-    "bun-types": "latest"
-  },
-  "module": "src/index.js"
+    "bun-types": "latest",
+    "pino-tee": "^0.3.0",
+    "ts-node": "^10.9.2"
+  }
 }

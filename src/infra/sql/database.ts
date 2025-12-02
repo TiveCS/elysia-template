@@ -1,5 +1,5 @@
+import "dotenv/config";
 import { DataSource } from "typeorm";
-import path from "path";
 
 const databaseUrl = process.env.DATABASE_URL;
 
@@ -12,9 +12,9 @@ export const database = new DataSource({
   logging: true,
   logger: "file",
   entities: [
-    path.join(__dirname, "src/infra/auth/entities/*.entity.{ts,js}"),
-    path.join(__dirname, "src/modules/entities/*.entity.{ts,js}"),
+    "src/infra/auth/entities/*.entity.{ts,js}",
+    "src/modules/entities/*.entity.{ts,js}",
   ],
-  migrations: [path.join(__dirname, "migrations/*.{ts,js}")],
-  migrationsRun: true,
+  migrations: ["migrations/*.{ts,js}"],
+  migrationsRun: false,
 });
