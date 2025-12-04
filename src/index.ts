@@ -1,8 +1,8 @@
 import "reflect-metadata";
-import openapi from "@elysiajs/openapi";
 import { logger, pino } from "@bogeychan/elysia-logger";
+import openapi from "@elysiajs/openapi";
 import { Elysia } from "elysia";
-import { betterAuth, BetterAuthOpenAPI } from "./infra/auth/auth.setup";
+import { BetterAuthOpenAPI, betterAuth } from "./infra/auth/auth.setup";
 
 const port = process.env.PORT;
 
