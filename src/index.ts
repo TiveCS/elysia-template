@@ -3,6 +3,9 @@ import { logger, pino } from "@bogeychan/elysia-logger";
 import openapi from "@elysiajs/openapi";
 import { Elysia } from "elysia";
 import { BetterAuthOpenAPI, betterAuth } from "./infra/auth/auth.setup";
+import { ok } from "./common/models";
+import { resultMapper } from "@/middlewares";
+import { todosRoute } from "./modules/todos/routes";
 
 const port = process.env.PORT;
 
@@ -14,6 +17,7 @@ const app = new Elysia()
       stream: pino.destination("./activity.log"),
     }),
   )
+  .use(resultMapper)
   .use(betterAuth)
   .use(
     openapi({
@@ -23,9 +27,7 @@ const app = new Elysia()
       },
     }),
   )
-  .get("/", () => {
-    throw new Error("Hello World Error");
-  })
+  .use(todosRoute)
   .listen(port);
 
 console.log(`🦊 Elysia is running at ${app.server?.url}`);

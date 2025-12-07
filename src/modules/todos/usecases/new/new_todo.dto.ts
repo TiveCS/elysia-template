@@ -1,6 +1,7 @@
 import z from "zod";
 
 export const newTodoRequestSchema = z.object({
+  ownerId: z.uuid(),
   title: z
     .string()
     .min(1, "Title must be at least 1 character long")

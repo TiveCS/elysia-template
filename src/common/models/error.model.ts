@@ -5,3 +5,11 @@ export type CommonError = {
   statusCode: HttpStatus;
   description: string;
 };
+
+export function toErrorResponse(error: CommonError, details?: string[]) {
+  return {
+    code: error.code,
+    description: error.description,
+    details,
+  };
+}

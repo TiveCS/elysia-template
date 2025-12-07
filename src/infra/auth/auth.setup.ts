@@ -1,24 +1,29 @@
 import Elysia from "elysia";
 import { auth } from ".";
+import { HttpStatus } from "@/common/constants";
+import { AuthErrors } from "@/common/errors";
 
-export const betterAuth = new Elysia({ name: "better-auth" })
-  .mount(auth.handler)
-  .macro({
-    auth: {
-      async resolve({ status, request: { headers } }) {
-        const session = await auth.api.getSession({
-          headers,
-        });
+export const betterAuth = new Elysia({ name: "better-auth" }).mount(
+  auth.handler,
+);
 
-        if (!session) return status(401);
+export const authMacro = new Elysia().macro({
+  auth: {
+    async resolve({ status, request: { headers } }) {
+      const session = await auth.api.getSession({
+        headers,
+      });
 
-        return {
-          user: session.user,
-          session: session.session,
-        };
-      },
+      if (!session)
+        return status(HttpStatus.Unauthorized, AuthErrors.Unauthorized);
+
+      return {
+        user: session.user,
+        session: session.session,
+      };
     },
-  });
+  },
+});
 
 let _schema: ReturnType<typeof auth.api.generateOpenAPISchema>;
 const getSchema = async () => (_schema ??= auth.api.generateOpenAPISchema());
