@@ -17,7 +17,6 @@ const app = new Elysia()
       stream: pino.destination("./activity.log"),
     }),
   )
-  .use(resultMapper)
   .use(betterAuth)
   .use(
     openapi({
