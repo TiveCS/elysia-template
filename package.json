@@ -9,6 +9,7 @@
     "test:coverage": "bun test --coverage",
     "dev": "bun run --watch src/index.ts",
     "auth:generate": "bun x @better-auth/cli@latest generate --config src/infra/auth/index.ts --output src/infra/sql/schemas/auth.schema.ts -y",
+    "auth:secret": "openssl rand -base64 32",
     "db:generate": "bun drizzle-kit generate",
     "db:up": "bun drizzle-kit up",
     "db:drop": "bun drizzle-kit drop",
@@ -19,6 +20,7 @@
   },
   "dependencies": {
     "@bogeychan/elysia-logger": "^0.1.10",
+    "@elysiajs/cors": "^1.4.0",
     "@elysiajs/openapi": "^1.4.11",
     "better-auth": "^1.4.5",
     "dotenv": "^17.2.3",

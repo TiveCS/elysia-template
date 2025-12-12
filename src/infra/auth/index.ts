@@ -6,6 +6,9 @@ import * as schema from "../sql/schemas";
 
 export const auth = betterAuth({
   basePath: "/api/auth",
+  trustedOrigins: [process.env.FRONTEND_URL],
+  baseURL: process.env.BETTER_AUTH_URL,
+  redirectURL: process.env.FRONTEND_URL,
   emailAndPassword: {
     enabled: true,
   },
@@ -23,6 +26,18 @@ export const auth = betterAuth({
   },
   experimental: {
     joins: true,
+  },
+  socialProviders: {
+    google: {
+      prompt: "select_account",
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    },
+
+    github: {
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    },
   },
   plugins: [openAPI()],
 });
